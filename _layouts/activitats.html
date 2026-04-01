@@ -4,21 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page.title }} | Vida al CAR | Institut CAR Sant Cugat</title>
-  <meta name="description" content="{{ page.description }}" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <meta name="description" content="{{ page.description | default: page.title }}" />
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
 </head>
+
 <body>
   <header class="site-header">
-    ...
+    <div class="container nav">
+      <a href="{{ '/index.html' | relative_url }}" class="brand">
+        <div class="logo">
+          <img src="{{ '/assets/img/logo-car.png' | relative_url }}" alt="Logotip del CAR" />
+        </div>
+        <div class="brand-text">
+          <strong>Institut CAR Sant Cugat</strong>
+          <span>Formació integral de l'esportista</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="{{ '/centre.html' | relative_url }}">El centre</a></li>
+          <li><a href="{{ '/estudiar.html' | relative_url }}">Estudiar al CAR</a></li>
+          <li><a href="{{ '/vida.html' | relative_url }}" class="active">Vida al CAR</a></li>
+          <li><a href="{{ '/secretaria.html' | relative_url }}">Secretaria</a></li>
+          <li><a href="{{ '/noticies.html' | relative_url }}">Notícies</a></li>
+          <li><a href="{{ '/docents.html' | relative_url }}">Docents</a></li>
+          <li><a href="{{ '/index.html#contacte' | relative_url }}">Contacte</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section class="hero-small">
       <div class="container">
         <nav class="breadcrumb" aria-label="Fil d'Ariadna">
-          <a href="/index.html">Inici</a>
+          <a href="{{ '/index.html' | relative_url }}">Inici</a>
           <span>/</span>
-          <a href="/vida.html">Vida al CAR</a>
+          <a href="{{ '/vida.html' | relative_url }}">Vida al CAR</a>
           <span>/</span>
           <span aria-current="page">{{ page.title }}</span>
         </nav>
@@ -31,15 +54,63 @@
       </div>
     </section>
 
+    {% if page.featured_image %}
+    <section class="section">
+      <div class="container narrow">
+        <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title }}" />
+      </div>
+    </section>
+    {% endif %}
+
     <section class="section">
       <div class="container narrow">
         {{ content }}
       </div>
     </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Vols continuar descobrint la vida al centre?</h2>
+            <p>
+              Torna a la secció de Vida al CAR per consultar altres activitats, projectes i iniciatives del centre.
+            </p>
+          </div>
+          <a href="{{ '/vida.html' | relative_url }}" class="btn">Tornar a Vida al CAR</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    ...
+    <div class="container footer-grid">
+      <div>
+        <h4>Institut CAR Sant Cugat</h4>
+        <p>
+          Centre educatiu vinculat al Centre d’Alt Rendiment, amb una proposta formativa adaptada a la realitat esportiva de l’alumnat.
+        </p>
+      </div>
+
+      <div>
+        <h4>Navegació</h4>
+        <ul>
+          <li><a href="{{ '/index.html' | relative_url }}">Portada</a></li>
+          <li><a href="{{ '/vida.html' | relative_url }}">Vida al CAR</a></li>
+          <li><a href="{{ '/noticies.html' | relative_url }}">Notícies</a></li>
+          <li><a href="{{ '/secretaria.html' | relative_url }}">Secretaria</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacte</h4>
+        <ul>
+          <li>Av. Alcalde Barnils, 5<br />08174 Sant Cugat del Vallès</li>
+          <li>Tel. <strong>936 75 39 50</strong></li>
+          <li><a href="mailto:iescar@ies.car.edu">iescar@ies.car.edu</a></li>
+        </ul>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
