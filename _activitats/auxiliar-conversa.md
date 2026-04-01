@@ -4,7 +4,7 @@ title: "Auxiliar de conversa"
 permalink: /vida/activitats/auxiliar-conversa.html
 description: "Programa d'auxiliar de conversa de l'Institut CAR Sant Cugat per reforçar la comunicació oral en anglès."
 summary: "Recurs educatiu que reforça la competència oral en llengües estrangeres i afavoreix l’obertura cultural de l’alumnat."
-featured_image: "/assets/img/uploads/auxiliar-conversa.jpg"
+featured_image: /assets/img/uploads/auxiliar-conversa.jpg
 published: true
 order: 6
 ---

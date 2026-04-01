@@ -13,3 +13,8 @@ defaults:
       type: "activitats"
     values:
       layout: "activitat"
+
+      collections:
+  activitats:
+    output: true
+    permalink: /vida/activitats/:name.html
