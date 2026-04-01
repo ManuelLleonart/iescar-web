@@ -2,6 +2,8 @@ title: "Institut CAR Sant Cugat"
 
 markdown: kramdown
 
+theme_note: "test"
+
 collections:
   activitat:
     output: true
