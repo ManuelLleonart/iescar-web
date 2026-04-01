@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: TU-USUARIO/TU-REPO
+  branch: main
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+collections:
+  - name: "activitats"
+    label: "Activitats"
+    folder: "_activitats"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Títol", name: "title", widget: "string" }
+      - { label: "Resum", name: "summary", widget: "text" }
+      - { label: "Descripció SEO", name: "description", widget: "text", required: false }
+      - { label: "Imatge destacada", name: "featured_image", widget: "image", required: false }
+      - { label: "Publicat", name: "published", widget: "boolean", default: true }
+      - { label: "Ordre", name: "order", widget: "number", default: 1 }
+      - { label: "Cos", name: "body", widget: "markdown" }

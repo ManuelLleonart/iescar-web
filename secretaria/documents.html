@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documents | Secretaria | Institut CAR Sant Cugat</title>
+  <meta
+    name="description"
+    content="Consulta i descarrega la documentació del centre: formularis, autoritzacions, sol·licituds i altres documents d'interès de l'Institut CAR Sant Cugat."
+  />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="brand">
+        <div class="logo">
+          <img src="../assets/img/logo-car.png" alt="Logotip del CAR" />
+        </div>
+        <div class="brand-text">
+          <strong>Institut CAR Sant Cugat</strong>
+          <span>Formació integral de l'esportista</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="../centre.html">El centre</a></li>
+          <li><a href="../estudiar.html">Estudiar al CAR</a></li>
+          <li><a href="../vida.html">Vida al CAR</a></li>
+          <li><a href="../secretaria.html" class="active">Secretaria</a></li>
+          <li><a href="../noticies.html">Notícies</a></li>
+          <li><a href="../docents.html">Docents</a></li>
+          <li><a href="../index.html#contacte">Contacte</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-small">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Fil d'Ariadna">
+          <a href="../index.html">Inici</a>
+          <span>/</span>
+          <a href="../secretaria.html">Secretaria</a>
+          <span>/</span>
+          <span aria-current="page">Documents</span>
+        </nav>
+
+        <h1>Documents</h1>
+        <p class="lead">
+          Consulta i descarrega formularis, autoritzacions, sol·licituds i altra documentació d'interès del centre.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container page-layout">
+
+        <div class="page-content">
+          <div class="card">
+            <h2>Documentació disponible</h2>
+            <p>
+              En aquest espai pots accedir a la documentació vigent del centre. Els documents s'actualitzen
+              de manera centralitzada per facilitar-ne la consulta.
+            </p>
+
+            <div class="docs-table-wrap">
+              <table class="docs-table">
+                <thead>
+                  <tr>
+                    <th>Document</th>
+                    <th>Descripció</th>
+                    <th>Data</th>
+                    <th>Etiquetes</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="docs-body">
+                  <tr>
+                    <td colspan="5">Carregant documents...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <aside class="section-nav">
+          <h3>Secretaria</h3>
+          <ul>
+            <li><a href="documents.html" class="active">Documents</a></li>
+            <li><a href="calendari-administratiu.html">Calendari administratiu</a></li>
+          </ul>
+
+          <h3>Per ensenyament</h3>
+          <ul>
+            <li><a href="secundaria.html">Secundària</a></li>
+            <li><a href="cfgm.html">CFGM</a></li>
+            <li><a href="cfgs.html">CFGS</a></li>
+            <li><a href="tecnics-esportius.html">Tècnics esportius</a></li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const SHEET_ID = "11RLVN9M7wpPijGHORRkoYQqlTr5TS1NcpYETXYR83AI";
+    const GID = "0";
+
+    const sheetUrl =
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+
+    async function loadDocuments() {
+      const tbody = document.getElementById("docs-body");
+
+      try {
+        const response = await fetch(sheetUrl);
+        const text = await response.text();
+
+        const jsonText = text
+          .replace("/*O_o*/", "")
+          .replace(/google\.visualization\.Query\.setResponse\(/, "")
+          .replace(/\);$/, "");
+
+        const data = JSON.parse(jsonText);
+
+        if (!data.table || !data.table.rows) {
+          throw new Error("No s'han trobat files a la fulla.");
+        }
+
+        const rows = data.table.rows;
+
+        if (!rows.length) {
+          tbody.innerHTML = `<tr><td colspan="5">No hi ha documents disponibles.</td></tr>`;
+          return;
+        }
+
+        const documents = rows
+  .slice(1)
+  .map((row) => {
+            const cells = row.c || [];
+
+            return {
+  titol: getCellValue(cells, 0),
+  descripcio: getCellValue(cells, 1),
+  data: getDateCellValue(cells, 2),
+  etiquetes: getCellValue(cells, 3),
+  url: getCellValue(cells, 4),
+};
+
+function getDateCellValue(cells, index) {
+  const cell = cells[index];
+
+  if (!cell) return "";
+
+  if (cell.f !== null && cell.f !== undefined) {
+    return String(cell.f).trim();
+  }
+
+  if (cell.v !== null && cell.v !== undefined) {
+    return String(cell.v).trim();
+  }
+
+  return "";
+}
+          })
+          .filter((doc) => doc.titol && doc.url);
+
+        if (!documents.length) {
+          tbody.innerHTML = `<tr><td colspan="5">No hi ha documents vàlids per mostrar.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = documents.map(renderRow).join("");
+      } catch (error) {
+        console.error(error);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5">
+              No s'han pogut carregar els documents. Revisa que la fulla sigui pública
+              i que l'ID i el gid siguin correctes.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function getCellValue(cells, index) {
+  const cell = cells[index];
+
+  if (!cell) return "";
+
+  if (cell.f !== null && cell.f !== undefined) {
+    return String(cell.f).trim();
+  }
+
+  if (cell.v !== null && cell.v !== undefined) {
+    return String(cell.v).trim();
+  }
+
+  return "";
+}
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatTags(tagsString) {
+      if (!tagsString) return "";
+      return tagsString
+        .split(";")
+        .map(tag => tag.trim())
+        .filter(Boolean)
+        .map(tag => `<span class="tag">${escapeHtml(tag)}</span>`)
+        .join("");
+    }
+
+    function renderRow(doc) {
+      const titol = escapeHtml(doc.titol);
+      const descripcio = escapeHtml(doc.descripcio);
+      const data = escapeHtml(doc.data);
+      const url = escapeHtml(doc.url);
+
+      return `
+        <tr>
+          <td>
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="doc-link">
+              ${titol}
+            </a>
+          </td>
+          <td>${descripcio}</td>
+          <td>${data}</td>
+          <td class="tags-cell">${formatTags(doc.etiquetes)}</td>
+          <td>
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="btn btn-small">
+              Obrir
+            </a>
+          </td>
+        </tr>
+      `;
+    }
+
+    loadDocuments();
+  </script>
+</body>
+</html>

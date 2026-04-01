@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }} | Vida al CAR | Institut CAR Sant Cugat</title>
+  <meta name="description" content="{{ page.description | default: page.summary }}" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/index.html" class="brand">
+        <div class="logo">
+          <img src="/assets/img/logo-CAR.png" alt="Logotip del CAR" />
+        </div>
+        <div class="brand-text">
+          <strong>Institut CAR Sant Cugat</strong>
+          <span>Formació integral de l'esportista</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="/centre.html">El centre</a></li>
+          <li><a href="/estudiar.html">Estudiar al CAR</a></li>
+          <li><a href="/vida.html" class="active">Vida al CAR</a></li>
+          <li><a href="/secretaria.html">Secretaria</a></li>
+          <li><a href="/noticies.html">Notícies</a></li>
+          <li><a href="/docents.html">Docents</a></li>
+          <li><a href="/index.html#contacte">Contacte</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-small">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Fil d'Ariadna">
+          <a href="/index.html">Inici</a>
+          <span>/</span>
+          <a href="/vida.html">Vida al CAR</a>
+          <span>/</span>
+          <a href="/vida/activitats/index.html">Activitats</a>
+          <span>/</span>
+          <span aria-current="page">{{ page.title }}</span>
+        </nav>
+
+        <h1>{{ page.title }}</h1>
+        {% if page.summary %}
+          <p class="lead">{{ page.summary }}</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        {% if page.featured_image %}
+          <p>
+            <img src="{{ page.featured_image }}" alt="{{ page.title }}" />
+          </p>
+        {% endif %}
+
+        {{ content }}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Vols continuar descobrint la vida al centre?</h2>
+            <p>
+              Torna a la secció d’activitats per consultar altres projectes i iniciatives del centre.
+            </p>
+          </div>
+          <a href="/vida/activitats/index.html" class="btn">Tornar a Activitats</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Institut CAR Sant Cugat</h4>
+        <p>
+          Centre educatiu vinculat al Centre d’Alt Rendiment, amb una proposta formativa adaptada a la realitat esportiva de l’alumnat.
+        </p>
+      </div>
+
+      <div>
+        <h4>Navegació</h4>
+        <ul>
+          <li><a href="/index.html">Portada</a></li>
+          <li><a href="/vida.html">Vida al CAR</a></li>
+          <li><a href="/noticies.html">Notícies</a></li>
+          <li><a href="/secretaria.html">Secretaria</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacte</h4>
+        <ul>
+          <li>Av. Alcalde Barnils, 5<br />08174 Sant Cugat del Vallès</li>
+          <li>Tel. <strong>936 75 39 50</strong></li>
+          <li><a href="mailto:iescar@ies.car.edu">iescar@ies.car.edu</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
