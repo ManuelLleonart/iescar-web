@@ -7,9 +7,9 @@ media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
 collections:
-  - name: "activitats"
-    label: "Activitats"
-    folder: "_activitats"
+  - name: "activitat"
+    label: "activitat"
+    folder: "_activitat"
     create: true
     delete: true
     slug: "{{slug}}"

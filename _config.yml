@@ -3,18 +3,18 @@ title: "Institut CAR Sant Cugat"
 markdown: kramdown
 
 collections:
-  activitats:
+  activitat:
     output: true
-    permalink: /vida/activitats/:name.html
+    permalink: /vida/activitat/:name.html
 
 defaults:
   - scope:
       path: ""
-      type: "activitats"
+      type: "activitat"
     values:
       layout: "activitat"
 
       collections:
-  activitats:
+  activitat:
     output: true
-    permalink: /vida/activitats/:name.html
+    permalink: /vida/activitat/:name.html

@@ -1,7 +1,7 @@
 ---
 layout: activitat
 title: "Auxiliar de conversa"
-permalink: /vida/activitats/auxiliar-conversa.html
+permalink: /vida/activitat/auxiliar-conversa.html
 description: "Programa d'auxiliar de conversa de l'Institut CAR Sant Cugat per reforçar la comunicació oral en anglès."
 summary: "Recurs educatiu que reforça la competència oral en llengües estrangeres i afavoreix l’obertura cultural de l’alumnat."
 featured_image: /assets/img/uploads/auxiliar-conversa.jpg
@@ -22,7 +22,7 @@ El recurs d’un/a auxiliar de conversa té com a objectiu principal donar supor
 ## Funcions principals
 
 - Facilitar pràctiques de conversa en anglès amb l’alumnat.
-- Col·laborar amb el professorat en activitats pedagògiques.
+- Col·laborar amb el professorat en activitat pedagògiques.
 - Enriquir l’experiència educativa amb una perspectiva cultural real.
 - Donar suport a projectes específics d’innovació lingüística.
 
