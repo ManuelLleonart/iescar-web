@@ -1179,15 +1179,13 @@ footer li {
 }
 .hero-visual {
   width: 100%;
-  min-height: 420px;   /* MUY IMPORTANTE */
+  min-height: 420px;
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-
   background-image:
     linear-gradient(rgba(120, 0, 0, 0.14), rgba(120, 0, 0, 0.14)),
     var(--hero-img);
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
